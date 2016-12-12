@@ -7,7 +7,8 @@ var environment = process.env.NODE_ENV || 'development';
 var pgp = require("pg-promise")(options);
 var connectionString = config.postgresURI[environment];
 var db = pgp(connectionString);
-var database_name = connectionString.split('/')
+
+var database_name = connectionString.split('/');
 console.log("Connected to database: " + database_name[database_name.length - 1])
 
 function getAllTasks(req, res, next){
@@ -19,6 +20,28 @@ function getAllTasks(req, res, next){
   .catch(function(err){
     return next(err);
   });  
+}
+
+function getCompletedTasks(req, res, next){
+  db.any('select * from tasks where completed=true')
+  .then(function(data){
+    res.status(200)
+    .json(data);
+  })
+  .catch(function(err){
+    return next(err);
+  });  
+}
+
+function getActiveTasks(req, res, next){
+  db.any('select * from tasks where completed=false')
+ .then(function(data){
+    res.status(200)
+    .json(data);
+  })
+  .catch(function(err){
+    return next(err);
+  });
 }
 
 function getSingleTask(req, res, next){
@@ -78,8 +101,11 @@ function removeTask(req, res, next){
 
 module.exports = {
   getAllTasks: getAllTasks,
+  getCompletedTasks: getCompletedTasks,
+  getActiveTasks: getActiveTasks,  
   getSingleTask: getSingleTask,
   createTask: createTask,
   updateTask: updateTask,
   removeTask: removeTask
+
 };

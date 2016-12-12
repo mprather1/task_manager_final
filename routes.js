@@ -10,11 +10,17 @@ router.use(function(req, res, next){
 
 router.route("/tasks")
   .get(db.getAllTasks)
-  .post(db.createTask)
+  .post(db.createTask);
+  
+router.route('/tasks/completed')
+  .get(db.getCompletedTasks);
 
+router.route('/tasks/active')
+  .get(db.getActiveTasks);
+  
 router.route("/tasks/:id")
   .get(db.getSingleTask)
   .put(db.updateTask)
-  .delete(db.removeTask)
+  .delete(db.removeTask);
 
 module.exports = router;
