@@ -14,7 +14,9 @@ var Controller = Marionette.Object.extend({
     
     var activeTasks = new ActiveTasks();
     var completedTasks = new CompletedTasks();
+    var tasksView = new TasksView();
     var tableView = new TableView();
+    var formModalView = new FormModalView({ collection: this.options.activeTasks });
 
     activeTasks.fetch({
       success: function(request, response){
@@ -36,7 +38,7 @@ var Controller = Marionette.Object.extend({
     
     this.options.activeTasks = activeTasks;
     this.options.completedTasks = completedTasks;
-
+    this.options.formModalView = formModalView;
     this.options.tableView = tableView;
     this.app.view.showChildView('main', this.options.tableView);
     
@@ -51,7 +53,7 @@ var Controller = Marionette.Object.extend({
   },
   
   newTask: function(){
-    var formModalView = new FormModalView({ collection: this.options.activeTasks });
+    this.options.formModalView.render();
   }
   
 });

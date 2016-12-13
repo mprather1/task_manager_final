@@ -8,10 +8,10 @@ var TaskModalView = Backbone.Marionette.View.extend({
   },
   onRender: function(){
     if ($('#task-modal').length){
-      $('#task-modal').remove()
+      $('#task-modal').remove();
     }
     if ($('.modal-backdrop').length){
-      $('.modal-backdrop').remove()
+      $('.modal-backdrop').remove();
     }
     this.$el.modal('show');
   }
