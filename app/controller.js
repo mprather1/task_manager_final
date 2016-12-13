@@ -41,7 +41,8 @@ var Controller = Marionette.Object.extend({
     this.options.formModalView = formModalView;
     this.options.tableView = tableView;
     this.app.view.showChildView('main', this.options.tableView);
-    this.options.formModalView.collection = this.options.activeTasks
+    this.options.formModalView.collection = this.options.activeTasks;
+    
   },
   
   active: function(){

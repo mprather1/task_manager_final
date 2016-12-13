@@ -107,5 +107,4 @@ module.exports = {
   createTask: createTask,
   updateTask: updateTask,
   removeTask: removeTask
-
 };

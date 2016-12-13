@@ -2,17 +2,22 @@ var Task = require("../models/Task");
 
 var FormModalView = Backbone.Marionette.View.extend({
   tagName: 'div',
+  
   id: 'form-modal',
+  
   className: 'modal fade',
+  
   template: require("../templates/form-modal-view-template.html"),
+  
   events: {
     'click .submit-button': 'submitForm',
   },
+  
   onRender: function(){
-    console.log(this.collection)
     this.$el.modal('show');
     window.history.back();
   },
+  
   submitForm: function(e){
     e.preventDefault();
     var task = new Task();
@@ -30,15 +35,12 @@ var FormModalView = Backbone.Marionette.View.extend({
     task.set(taskAttrs);
     task.save(null, {
       success: function(model, response){
-        console.log(response.message)
+        console.log(response.message);
       }
     });
     this.collection.add(task);
-    // this.render();
-    // if ($('.modal-backdrop').length){
-      // $('.modal-backdrop').remove()
-    // }
-  },
+  }
+  
 });
 
 module.exports = FormModalView;

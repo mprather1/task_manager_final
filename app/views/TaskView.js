@@ -7,18 +7,20 @@ var TaskView = Backbone.Marionette.View.extend({
   template: require("../templates/task-view-template.html"),
   
   attributes: function(){
-    return {
-    "data-id": this.model.get('id'),
-    };
+    if (this.model.get('id')){
+      return {
+        "data-id": this.model.get('id'),
+      };
+    }
   },
   
   id: function(){
-    if (this.options.model.attributes.completed == true){
+    if (this.options.model.attributes.completed === true){
       return 'completed';
     } else {
       return 'active';
     }
-  },
+  }
 });
 
 module.exports = TaskView;
