@@ -3,6 +3,7 @@ var ActiveTasks = require("./collections/ActiveTasks");
 var CompletedTasks = require("./collections/CompletedTasks");
 var TasksView = require("./views/TasksView");
 var TableView = require("./views/TableView");
+var FormModalView = require("./views/FormModalView");
 var style = require("./public/css/style.scss");
 
 var Controller = Marionette.Object.extend({
@@ -47,6 +48,10 @@ var Controller = Marionette.Object.extend({
   
   completed: function(){
     this.options.tableView.showChildView('body', new TasksView({ collection: this.options.completedTasks }));
+  },
+  
+  newTask: function(){
+    var formModalView = new FormModalView({ collection: this.options.activeTasks });
   }
   
 });
