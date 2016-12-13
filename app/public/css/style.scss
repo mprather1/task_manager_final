@@ -1,1 +1,18 @@
+table {
+  border: 1px solid lightgrey;
+}
 
+.table-header {
+  background-color: rgb(231, 231, 230);
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+#new-task {
+  float: right;
+  margin-top: 12px;
+  margin-right: 5px;
+}

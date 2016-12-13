@@ -1,7 +1,8 @@
 var Marionette = require('marionette');
-var BaseCollectionView = require("./views/BaseCollectionView");
-var RouterView = require("./views/RouterView");
-var BaseCollection = require("./collections/BaseCollection");
+var ActiveTasks = require("./collections/ActiveTasks");
+var CompletedTasks = require("./collections/CompletedTasks");
+var TasksView = require("./views/TasksView");
+var TableView = require("./views/TableView");
 var style = require("./public/css/style.scss");
 
 var Controller = Marionette.Object.extend({
@@ -10,29 +11,42 @@ var Controller = Marionette.Object.extend({
     
     this.app = options.app;
     
-    var baseCollection = new BaseCollection();
-    var baseCollectionView = new BaseCollectionView({ collection: baseCollection });
+    var activeTasks = new ActiveTasks();
+    var completedTasks = new CompletedTasks();
+    var tableView = new TableView();
 
-    baseCollection.fetch({
+    activeTasks.fetch({
       success: function(request, response){
-        console.log("Successfully fetched baseCollection...");
+        console.log("Successfully fetched active tasks...");
       },
       error: function(err){
         console.log("Error: " + err);
       }
     });
     
-    this.options.baseCollectionView = baseCollectionView;
-    this.app.view.showChildView('main', this.options.baseCollectionView);
+    completedTasks.fetch({
+      success: function(request, response){
+        console.log("Successfully fetched completed tasks...");
+      },
+      error: function(err){
+        console.log("Error: " + err);
+      }
+    });
+    
+    this.options.activeTasks = activeTasks;
+    this.options.completedTasks = completedTasks;
+
+    this.options.tableView = tableView;
+    this.app.view.showChildView('main', this.options.tableView);
     
   },
   
-  oneRoute: function(){
-    this.app.view.showChildView('routerView', new RouterView({ message: "This is Route Number #1!" }));
+  active: function(){
+    this.options.tableView.showChildView('body', new TasksView({ collection: this.options.activeTasks }));
   },
   
-  twoRoute: function(){
-    this.app.view.showChildView('routerView', new RouterView({ message: 'This is Route Number #2!' }));
+  completed: function(){
+    this.options.tableView.showChildView('body', new TasksView({ collection: this.options.completedTasks }));
   }
   
 });
