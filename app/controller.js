@@ -14,7 +14,6 @@ var Controller = Marionette.Object.extend({
     
     var activeTasks = new ActiveTasks();
     var completedTasks = new CompletedTasks();
-    var tasksView = new TasksView();
     var tableView = new TableView();
     var formModalView = new FormModalView();
 

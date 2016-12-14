@@ -8,6 +8,9 @@ var TaskModalView = Backbone.Marionette.View.extend({
   
   template: require("../templates/task-modal-view-template.html"),
   
+  events: {
+    'click .complete-button': 'completeTask'
+  },
   initialize: function(){
     this.render();
   },
@@ -20,6 +23,17 @@ var TaskModalView = Backbone.Marionette.View.extend({
       $('.modal-backdrop').remove();
     }
     this.$el.modal('show');
+  },
+  
+  completeTask: function(e){
+    e.preventDefault();
+    this.model.set("completed", true);
+    this.model.save(null, {
+      success: function(model, response){
+        console.log(response.message);
+      }
+    });
+    this.model.collection.remove(this.model)
   }
   
 });

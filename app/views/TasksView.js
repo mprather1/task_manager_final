@@ -5,6 +5,10 @@ var TasksView = Backbone.Marionette.CollectionView.extend({
   
   tagName: 'tbody',
   
+  initialize: function(){
+    this.listenTo(this.collection, 'sync', this.render)
+  },
+  
   childView: TaskView,
   
   ui: {

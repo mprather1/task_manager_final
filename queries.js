@@ -71,8 +71,8 @@ function createTask(req, res, next){
 }
 
 function updateTask(req, res, next){
-  db.none('update tasks set name=$1 where id=$2', [req.body.name, parseInt(req.params.id)])
-    .then(function(){
+  db.none('update tasks set completed=$1 where id=$2', [req.body.completed, parseInt(req.params.id)])
+  .then(function(){
       res.status(200)
         .json({
           status: 'success',
