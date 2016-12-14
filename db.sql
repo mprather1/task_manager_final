@@ -6,15 +6,16 @@ CREATE DATABASE api_development;
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
-    name VARCHAR,
+    first_name VARCHAR,
+    last_name VARCHAR,
     email VARCHAR
 );
   
-INSERT INTO users ( name, email )
-VALUES ('Mike', 'mprather@example.com');
+INSERT INTO users ( first_name, last_name, email )
+VALUES ('Michael', 'Prather', 'mprather@example.com');
 
-INSERT INTO users ( name, email )
-VALUES ('KillBill', 'killbill@example.com');
+INSERT INTO users ( first_name, last_name, email )
+VALUES ('Kill', 'Bill', 'killbill@example.com');
 
 CREATE TABLE tasks (
   ID SERIAL PRIMARY KEY,

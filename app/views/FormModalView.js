@@ -26,7 +26,6 @@ var FormModalView = Backbone.Marionette.View.extend({
   },
   
   onRender: function(){
-    console.log(this.regions.userRadio.el)
     this.$el.modal('show');
     this.showChildView('userRadio', new UsersView({
       collection: this.users
