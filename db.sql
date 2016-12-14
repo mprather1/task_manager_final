@@ -17,14 +17,14 @@ CREATE TABLE tasks (
     notes VARCHAR
 );
   
-INSERT INTO tasks ( completed, item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes )
-VALUES (true, '1', '111', 'project', 'description', 'high', 'mike', 'mike', '10-10-2017', 'notes');
+INSERT INTO tasks (  item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes )
+VALUES ('1', '111', 'project', 'description', 'high', 'mike', 'mike', '10-10-2017', 'notes');
 
-INSERT INTO tasks ( completed, item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes )
-VALUES (true, '2', '111', 'project', 'description', 'high', 'mike', 'mike', '10-13-2017', 'notes');
+INSERT INTO tasks ( item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes )
+VALUES ('2', '111', 'project', 'description', 'high', 'mike', 'mike', '10-13-2017', 'notes');
 
-INSERT INTO tasks ( completed, item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes )
-VALUES (true, '3', '222', 'project', 'description', 'high', 'mike', 'mike', '10-14-2017', 'notes');
+INSERT INTO tasks ( item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes )
+VALUES ('3', '222', 'project', 'description', 'high', 'mike', 'mike', '10-14-2017', 'notes');
 
 INSERT INTO tasks ( item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes )
 VALUES ('4', '222', 'project', 'description2', 'low', 'mike', 'mike', '10-11-2017', 'Notes');

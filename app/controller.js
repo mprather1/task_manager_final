@@ -45,7 +45,7 @@ var Controller = Marionette.Object.extend({
   },
   
   active: function(){
-    this.options.tableView.showChildView('body', new TasksView({ collection: this.options.activeTasks }));
+    this.options.tableView.showChildView('body', new TasksView({ collection: this.options.activeTasks, completedTasks: this.options.completedTasks }));
     $('#active-radio').prop("checked", true);
   },
   

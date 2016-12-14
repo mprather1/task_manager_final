@@ -11,7 +11,8 @@ var TaskModalView = Backbone.Marionette.View.extend({
   events: {
     'click .complete-button': 'completeTask'
   },
-  initialize: function(){
+  initialize: function(options){
+    this.completedTasks = options.completedTasks
     this.render();
   },
   
@@ -34,6 +35,7 @@ var TaskModalView = Backbone.Marionette.View.extend({
       }
     });
     this.model.collection.remove(this.model)
+    this.completedTasks.add(this.model)
   }
   
 });

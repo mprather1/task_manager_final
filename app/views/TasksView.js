@@ -5,8 +5,9 @@ var TasksView = Backbone.Marionette.CollectionView.extend({
   
   tagName: 'tbody',
   
-  initialize: function(){
-    this.listenTo(this.collection, 'sync', this.render)
+  initialize: function(options){
+    this.completedTasks = options.completedTasks
+    this.listenTo(this.collection, 'sync', this.render);
   },
   
   childView: TaskView,
@@ -22,7 +23,7 @@ var TasksView = Backbone.Marionette.CollectionView.extend({
   handleClick: function(e){
     var id = $(e.currentTarget).data("id");
     var task = this.collection.get(id);
-    var taskModalView = new TaskModalView({ model: task });
+    var taskModalView = new TaskModalView({ model: task, completedTasks: this.completedTasks });
   }
 
 });
