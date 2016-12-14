@@ -1,10 +1,11 @@
 var TableView = Backbone.Marionette.View.extend({
   
-  tagName: 'table',
+  tagName: 'div',
+  
   
   template: require("../templates/table-view-template.html"),
   
-  className: 'table table-hover',
+  className: 'panel panel-default',
   
   regions: {
     body: {
@@ -18,6 +19,7 @@ var TableView = Backbone.Marionette.View.extend({
     'mouseout .table-header': 'mouseoutHeader',
     'mouseover .table-row': 'mouseoverRow',
     'mouseout .table-row': 'mouseoutRow',
+    'change input[type=radio]': 'changedRadio'
   },
   
   mouseoverHeader: function(event){
@@ -34,6 +36,9 @@ var TableView = Backbone.Marionette.View.extend({
   
   mouseoutRow: function(event){
     $(event.currentTarget).css("background-color", "");
+  },
+  changedRadio: function(e){
+    Backbone.history.navigate('tasks/' + e.currentTarget.value, { trigger: true })
   }
   
 });
