@@ -3,6 +3,19 @@ CREATE DATABASE api_development;
 
 \c api_development;
 
+
+CREATE TABLE users (
+  ID SERIAL PRIMARY KEY,
+    name VARCHAR,
+    email VARCHAR
+);
+  
+INSERT INTO users ( name, email )
+VALUES ('Mike', 'mprather@example.com');
+
+INSERT INTO users ( name, email )
+VALUES ('KillBill', 'killbill@example.com');
+
 CREATE TABLE tasks (
   ID SERIAL PRIMARY KEY,
     completed BOOL DEFAULT 'f',

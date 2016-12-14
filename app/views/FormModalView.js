@@ -1,4 +1,5 @@
 var Task = require("../models/Task");
+var UsersView = require("./UsersView");
 
 var FormModalView = Backbone.Marionette.View.extend({
   tagName: 'div',
@@ -13,13 +14,29 @@ var FormModalView = Backbone.Marionette.View.extend({
     'click .submit-button': 'submitForm',
   },
   
+  regions: {
+    userRadio: {
+      el: '#assigned_to_input',
+      replaceElement: true
+    }
+  },
+  
+  initialize: function(options){
+    this.users = options.users
+  },
+  
   onRender: function(){
+    console.log(this.regions.userRadio.el)
     this.$el.modal('show');
+    this.showChildView('userRadio', new UsersView({
+      collection: this.users
+    }))
     window.history.back();
   },
   
   submitForm: function(e){
     e.preventDefault();
+    var items = []
     var task = new Task();
     var taskAttrs = {
       item_number: $('#item_number_input').val(),
@@ -28,7 +45,7 @@ var FormModalView = Backbone.Marionette.View.extend({
       description: $('#description_input').val(),
       priority: $('[name="priority-radio"]:radio:checked').val(),
       requestor: $('#requestor_input').val(),
-      assigned_to: $('#assigned_to_input').val(),
+      assigned_to: $('input[name="assigned-radio"]:radio:checked').val(),
       due_date: $('#due_date_input').val(),
       notes: $('#notes_input').val()
     };

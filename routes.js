@@ -23,5 +23,11 @@ router.route("/tasks/:id")
   .get(db.getSingleTask)
   .put(db.updateTask)
   .delete(db.removeTask);
+  
+router.route("/users")
+  .get(db.getAllUsers);
+  
+// router.route('/users/:id')
+//   .get(db.getSingleUser);
 
 module.exports = router;

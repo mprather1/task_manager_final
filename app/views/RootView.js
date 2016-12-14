@@ -24,7 +24,6 @@ var RootView = Backbone.Marionette.View.extend({
  
   onRender: function(){
     this.showChildView('header', new NavigationView({ title: "Task Manager" }));
- 
   }
 
 });

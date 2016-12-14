@@ -1,4 +1,5 @@
 var Marionette = require('marionette');
+var Users = require("./collections/Users");
 var ActiveTasks = require("./collections/ActiveTasks");
 var CompletedTasks = require("./collections/CompletedTasks");
 var TasksView = require("./views/TasksView");
@@ -12,10 +13,11 @@ var Controller = Marionette.Object.extend({
     
     this.app = options.app;
     
+    var users = new Users();
     var activeTasks = new ActiveTasks();
     var completedTasks = new CompletedTasks();
     var tableView = new TableView();
-    var formModalView = new FormModalView();
+    var formModalView = new FormModalView({ users: users});
 
     activeTasks.fetch({
       success: function(request, response){
@@ -35,12 +37,23 @@ var Controller = Marionette.Object.extend({
       }
     });
     
+    users.fetch({
+      success: function(request, response){
+        console.log("Successfully fetched users...")
+      },
+      error: function(err){
+        console.log("Error: " + err)
+      }
+    });
+    
+    this.options.users = users;
     this.options.activeTasks = activeTasks;
     this.options.completedTasks = completedTasks;
     this.options.formModalView = formModalView;
     this.options.tableView = tableView;
     this.app.view.showChildView('main', this.options.tableView);
     this.options.formModalView.collection = this.options.activeTasks;
+    // this.options.formModalView.users = this.options.users
     
   },
   

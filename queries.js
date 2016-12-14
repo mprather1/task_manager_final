@@ -99,6 +99,17 @@ function removeTask(req, res, next){
     });
 }
 
+function getAllUsers(req, res, next){
+  db.any('select * from users')
+    .then(function(data){
+      res.status(200)
+        .json(data);
+    })
+    .catch(function(err){
+      return next(err);
+    });
+}
+
 module.exports = {
   getAllTasks: getAllTasks,
   getCompletedTasks: getCompletedTasks,
@@ -106,5 +117,6 @@ module.exports = {
   getSingleTask: getSingleTask,
   createTask: createTask,
   updateTask: updateTask,
-  removeTask: removeTask
+  removeTask: removeTask,
+  getAllUsers: getAllUsers
 };
