@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development PORT=8000 node server.js"
+    "start": "NODE_ENV=development PORT=8000 supervisor node server.js"
   },
   "repository": {
     "type": "git",
