@@ -38,7 +38,7 @@ var TableView = Backbone.Marionette.View.extend({
     $(event.currentTarget).css("background-color", "");
   },
   changedRadio: function(e){
-    Backbone.history.navigate('tasks/' + e.currentTarget.value, { trigger: true })
+    Backbone.history.navigate('tasks/' + e.currentTarget.value, { trigger: true });
   }
   
 });

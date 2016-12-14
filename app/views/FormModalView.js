@@ -39,6 +39,8 @@ var FormModalView = Backbone.Marionette.View.extend({
       }
     });
     this.collection.add(task);
+    this.collection.fetch();
+    Backbone.history.navigate('tasks/active', { trigger: true });
   }
   
 });
