@@ -8,7 +8,8 @@ CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
     first_name VARCHAR,
     last_name VARCHAR,
-    email VARCHAR
+    email VARCHAR,
+    password_hash VARCHAR
 );
   
 INSERT INTO users ( first_name, last_name, email )

@@ -25,6 +25,7 @@ router.route("/tasks/:id")
   .delete(db.removeTask);
   
 router.route("/users")
+  .post(db.createUser)
   .get(db.getAllUsers);
   
 // router.route('/users/:id')

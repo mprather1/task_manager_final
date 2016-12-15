@@ -7,6 +7,8 @@ var environment = process.env.NODE_ENV || 'development';
 var pgp = require("pg-promise")(options);
 var connectionString = config.postgresURI[environment];
 var db = pgp(connectionString);
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
 
 var database_name = connectionString.split('/');
 console.log("Connected to database: " + database_name[database_name.length - 1])
@@ -110,6 +112,21 @@ function getAllUsers(req, res, next){
     });
 }
 
+function createUser(req, res, next){
+  var hash = bcrypt.hashSync(req.body.password, salt);
+  db.none('insert into users(first_name, last_name, email, password_hash)' + 'values($1, $2, $3, $4)', [req.body.first_name, req.body.last_name, req.body.email, hash])
+  .then(function(){
+    res.status(200)
+      .json({
+        status: 'success',
+        message: 'Inserted ONE user'
+      });
+  })
+  .catch(function(err){
+    return next(err);
+  });
+}
+
 module.exports = {
   getAllTasks: getAllTasks,
   getCompletedTasks: getCompletedTasks,
@@ -118,5 +135,6 @@ module.exports = {
   createTask: createTask,
   updateTask: updateTask,
   removeTask: removeTask,
-  getAllUsers: getAllUsers
+  getAllUsers: getAllUsers,
+  createUser: createUser
 };
