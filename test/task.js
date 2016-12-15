@@ -30,17 +30,6 @@ describe('Tasks', function(){
       });
   });
   
-  it('should list ALL completed tasks on /tasks/completed GET', function(done){
-    chai.request(server)
-      .get('/api/tasks/completed')
-      .end(function(err, res){
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res).to.be.json;
-        done();
-      });
-  });
-  
   it('should update a SINGLE task on /tasks PUT', function(done) {
     chai.request(server)
     .put('/api/tasks/active/1')
@@ -61,10 +50,44 @@ describe('Tasks', function(){
         expect(res).to.have.status(200);
         expect(res).to.be.json;
         expect(res).to.be.a('object');
+        expect(res.body).to.have.property('id')
+        expect(res.body).to.have.property('location_number')
+        expect(res.body).to.have.property('project')
+        expect(res.body).to.have.property('description')
+        expect(res.body).to.have.property('priority')
+        expect(res.body).to.have.property('requestor')
+        expect(res.body).to.have.property('assigned_to')
+        expect(res.body).to.have.property('due_date')
+        expect(res.body).to.have.property('notes')
+        
+        var complete = res.body.completed
+        expect(complete).to.be.true
+        
         done();
       });    
   });
   
+  it('should list ALL completed tasks on /tasks/completed GET', function(done){
+    chai.request(server)
+      .get('/api/tasks/completed')
+      .end(function(err, res){
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body[0]).to.have.property('id')
+        expect(res.body[0]).to.have.property('location_number')
+        expect(res.body[0]).to.have.property('project')
+        expect(res.body[0]).to.have.property('description')
+        expect(res.body[0]).to.have.property('priority')
+        expect(res.body[0]).to.have.property('requestor')
+        expect(res.body[0]).to.have.property('assigned_to')
+        expect(res.body[0]).to.have.property('due_date')
+        expect(res.body[0]).to.have.property('notes')        
+        done();
+      });
+  });
+  
+   
   it.skip('should delete a SINGLE task on /tasks/:id DELETE', function(done) {
     chai.request(server)
       .get("/api/tasks/active")

@@ -56,6 +56,14 @@ CREATE DATABASE api_test;
 
 \c api_test;
 
+CREATE TABLE users (
+  ID SERIAL PRIMARY KEY,
+    first_name VARCHAR,
+    last_name VARCHAR,
+    email VARCHAR,
+    password_hash VARCHAR
+);
+
 CREATE TABLE tasks (
   ID SERIAL PRIMARY KEY,
     completed BOOL DEFAULT 'f',
@@ -74,6 +82,14 @@ DROP DATABASE IF EXISTS api_production;
 CREATE DATABASE api_production;
 
 \c api_production;
+
+CREATE TABLE users (
+  ID SERIAL PRIMARY KEY,
+    first_name VARCHAR,
+    last_name VARCHAR,
+    email VARCHAR,
+    password_hash VARCHAR
+);
 
 CREATE TABLE tasks (
   ID SERIAL PRIMARY KEY,
