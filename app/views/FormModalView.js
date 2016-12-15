@@ -22,20 +22,19 @@ var FormModalView = Backbone.Marionette.View.extend({
   },
   
   initialize: function(options){
-    this.users = options.users
+    this.users = options.users;
   },
   
   onRender: function(){
     this.$el.modal('show');
     this.showChildView('userRadio', new UsersView({
       collection: this.users
-    }))
+    }));
     window.history.back();
   },
   
   submitForm: function(e){
     e.preventDefault();
-    var items = []
     var task = new Task();
     var taskAttrs = {
       item_number: $('#item_number_input').val(),

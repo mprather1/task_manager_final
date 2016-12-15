@@ -11,7 +11,10 @@ var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
 
 var database_name = connectionString.split('/');
-console.log("Connected to database: " + database_name[database_name.length - 1])
+console.log("Connected to database: " + database_name[database_name.length - 1]);
+
+//Tasks
+/////////////////////////////////////////////////////////////////////////////////
 
 function getAllTasks(req, res, next){
   db.any('select * from tasks')
@@ -101,6 +104,9 @@ function removeTask(req, res, next){
     });
 }
 
+//Users
+////////////////////////////////////////////////////////////////
+
 function getAllUsers(req, res, next){
   db.any('select * from users')
     .then(function(data){
@@ -127,7 +133,51 @@ function createUser(req, res, next){
   });
 }
 
+function getSingleUser(req, res, next){
+  var userID = parseInt(req.params.id);
+  db.one('select * from users where id = $1', userID)
+    .then(function(data){
+      res.status(200)
+       .json(data);
+    })
+    .catch(function(err){
+      return next(err);
+    });
+}
+
+function updateUser(req, res, next){
+  var hash = bcrypt.hashSync(req.body.password, salt);
+  db.none('update users set password_hash=$1 where id=$2', [hash, parseInt(req.params.id)])
+  .then(function(){
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated user'
+        });
+    })
+    .catch(function(err){
+      return next(err);
+    });
+}
+
+function removeUser(req, res, next){
+  var userID = parseInt(req.params.id);
+  db.result('delete from users where id = $1', userID)
+    .then(function(result){
+      res.status(200)
+        .json({
+          status: 'success',
+          message: `Removed ${result.rowCount} user`
+        });
+    })
+    .catch(function(err){
+      return next(err);
+    });
+}
+
 module.exports = {
+
+//Tasks
   getAllTasks: getAllTasks,
   getCompletedTasks: getCompletedTasks,
   getActiveTasks: getActiveTasks,  
@@ -135,6 +185,12 @@ module.exports = {
   createTask: createTask,
   updateTask: updateTask,
   removeTask: removeTask,
+
+//Users  
   getAllUsers: getAllUsers,
-  createUser: createUser
+  getSingleUser: getSingleUser,
+  createUser: createUser,
+  updateUser: updateUser,
+  removeUser: removeUser,
+
 };

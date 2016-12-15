@@ -28,7 +28,10 @@ router.route("/users")
   .post(db.createUser)
   .get(db.getAllUsers);
   
-// router.route('/users/:id')
-//   .get(db.getSingleUser);
+router.route('/users/:id')
+  .get(db.getSingleUser)
+  .put(db.updateUser)
+  .delete(db.removeUser);
+  
 
 module.exports = router;

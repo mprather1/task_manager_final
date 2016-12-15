@@ -12,11 +12,12 @@ CREATE TABLE users (
     password_hash VARCHAR
 );
   
-INSERT INTO users ( first_name, last_name, email )
-VALUES ('Michael', 'Prather', 'mprather@example.com');
+INSERT INTO users ( first_name, last_name, email, password_hash )
+VALUES ('Michael', 'Prather', 'mprather@example.com', '$2a$10$dzRDo.p/8GlXkeQFPGbebeRYOfwrxGcE1AYvmn0Y89t7mty3FBUWO');
 
-INSERT INTO users ( first_name, last_name, email )
-VALUES ('Kill', 'Bill', 'killbill@example.com');
+INSERT INTO users ( first_name, last_name, email, password_hash )
+VALUES ('Kill', 'Bill', 'killbill@example.com', '$2a$10$dzRDo.p/8GlXkeQFPGbeberEI5tpZFQ0Uo3ouvKJRS5ryi/F8I1IC');
+
 
 CREATE TABLE tasks (
   ID SERIAL PRIMARY KEY,

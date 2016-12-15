@@ -7,17 +7,17 @@ local   all             postgres                                trust #peer
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 psql -f db.sql -U postgres
 
-#GET models
-curl http://127.0.0.1:8000/api/models
+#GET users
+curl http://127.0.0.1:8000/api/users
 
-#GET models/:id
-curl http://127.0.0.1:8000/api/models/:id
+#GET users/:id
+curl http://127.0.0.1:8000/api/users/:id
 
-#POST models
-curl -H "Content-Type: application/json" -X POST -d '{"name":"killbill"}' http://127.0.0.1:8000/api/models
+#POST users
+curl -H "Content-Type: application/json" -X POST -d '{"first_name":"Kill", "last_name":"Bill", "email":"KillBill@dead.com", "password":"dead"}' http://127.0.0.1:8000/api/users
 
-#PUT models
-curl -H "Content-Type: application/json" -X PUT -d '{"name":"Kill Bill"}' http://127.0.0.1:8000/api/models/2
+#PUT users
+curl -H "Content-Type: application/json" -X PUT -d '{"password":"Kill Bill"}' http://127.0.0.1:8000/api/users/1
 
-#DELETE models
-curl -X DELETE http://127.0.0.1:8000/api/models/1
+#DELETE users
+curl -X DELETE http://127.0.0.1:8000/api/users/1

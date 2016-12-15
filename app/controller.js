@@ -39,10 +39,10 @@ var Controller = Marionette.Object.extend({
     
     users.fetch({
       success: function(request, response){
-        console.log("Successfully fetched users...")
+        console.log("Successfully fetched users...");
       },
       error: function(err){
-        console.log("Error: " + err)
+        console.log("Error: " + err);
       }
     });
     
@@ -53,7 +53,6 @@ var Controller = Marionette.Object.extend({
     this.options.tableView = tableView;
     this.app.view.showChildView('main', this.options.tableView);
     this.options.formModalView.collection = this.options.activeTasks;
-    // this.options.formModalView.users = this.options.users
     
   },
   
