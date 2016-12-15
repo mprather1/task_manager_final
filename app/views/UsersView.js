@@ -1,8 +1,8 @@
 var UserView = require("./UserView");
 
 var UsersView = Backbone.Marionette.CollectionView.extend({
-  tagName: 'label',
-  className: 'radio-inline',
+  tagName: 'div',
+  // className: 'radio',
   childView: UserView
 });
 
