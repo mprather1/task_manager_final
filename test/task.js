@@ -26,6 +26,16 @@ describe('Tasks', function(){
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res).to.be.json;
+        expect(res.body[0]).to.have.property('id')
+        expect(res.body[0]).to.have.property('location_number')
+        expect(res.body[0]).to.have.property('project')
+        expect(res.body[0]).to.have.property('description')
+        expect(res.body[0]).to.have.property('priority')
+        expect(res.body[0]).to.have.property('requestor')
+        expect(res.body[0]).to.have.property('assigned_to')
+        expect(res.body[0]).to.have.property('due_date')
+        expect(res.body[0]).to.have.property('notes')
+        expect(res.body[0].completed).to.be.false;        
         done();
       });
   });
@@ -59,10 +69,7 @@ describe('Tasks', function(){
         expect(res.body).to.have.property('assigned_to')
         expect(res.body).to.have.property('due_date')
         expect(res.body).to.have.property('notes')
-        
-        var complete = res.body.completed
-        expect(complete).to.be.true
-        
+        expect(res.body.completed).to.be.true;
         done();
       });    
   });
@@ -82,7 +89,8 @@ describe('Tasks', function(){
         expect(res.body[0]).to.have.property('requestor')
         expect(res.body[0]).to.have.property('assigned_to')
         expect(res.body[0]).to.have.property('due_date')
-        expect(res.body[0]).to.have.property('notes')        
+        expect(res.body[0]).to.have.property('notes')
+        expect(res.body[0].completed).to.be.true;
         done();
       });
   });
