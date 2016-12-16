@@ -8,15 +8,16 @@ CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
     first_name VARCHAR,
     last_name VARCHAR,
+    username VARCHAR,
     email VARCHAR,
     password_hash VARCHAR
 );
   
-INSERT INTO users ( first_name, last_name, email, password_hash )
-VALUES ('Michael', 'Prather', 'mprather@example.com', '$2a$10$dzRDo.p/8GlXkeQFPGbebeRYOfwrxGcE1AYvmn0Y89t7mty3FBUWO');
+INSERT INTO users ( first_name, last_name, username, email, password_hash )
+VALUES ('Michael', 'Prather', 'mprather1', 'mprather@example.com', '$2a$10$dzRDo.p/8GlXkeQFPGbebeRYOfwrxGcE1AYvmn0Y89t7mty3FBUWO');
 
-INSERT INTO users ( first_name, last_name, email, password_hash )
-VALUES ('Kill', 'Bill', 'killbill@example.com', '$2a$10$dzRDo.p/8GlXkeQFPGbeberEI5tpZFQ0Uo3ouvKJRS5ryi/F8I1IC');
+INSERT INTO users ( first_name, last_name, username, email, password_hash )
+VALUES ('Kill', 'Bill', 'killbill', 'killbill@example.com', '$2a$10$dzRDo.p/8GlXkeQFPGbeberEI5tpZFQ0Uo3ouvKJRS5ryi/F8I1IC');
 
 
 CREATE TABLE tasks (
@@ -60,6 +61,7 @@ CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
     first_name VARCHAR,
     last_name VARCHAR,
+    username VARCHAR,
     email VARCHAR,
     password_hash VARCHAR
 );
@@ -87,6 +89,7 @@ CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
     first_name VARCHAR,
     last_name VARCHAR,
+    username VARCHAR,
     email VARCHAR,
     password_hash VARCHAR
 );

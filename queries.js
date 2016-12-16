@@ -120,7 +120,7 @@ function getAllUsers(req, res, next){
 
 function createUser(req, res, next){
   var hash = bcrypt.hashSync(req.body.password, salt);
-  db.none('insert into users(first_name, last_name, email, password_hash)' + 'values($1, $2, $3, $4)', [req.body.first_name, req.body.last_name, req.body.email, hash])
+  db.none('insert into users(first_name, last_name, username, email, password_hash)' + 'values($1, $2, $3, $4, $5)', [req.body.first_name, req.body.last_name, req.body.username, req.body.email, hash])
   .then(function(){
     res.status(200)
       .json({

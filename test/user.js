@@ -11,7 +11,7 @@ describe('Users', function(){
   it('should add a SINGLE user on /users POST', function(done) {
     chai.request(server)
     .post('/api/users')
-    .send({"first_name":"name", "last_name":"name", "email":"email", "password":"passweord"})
+    .send({"first_name":"name", "last_name":"name", "username":"username", "email":"email", "password":"password"})
     .end(function(err, res){
       expect(res).to.have.status(200);
       expect(res).to.be.json;
@@ -30,8 +30,12 @@ describe('Users', function(){
         expect(res.body[0]).to.have.property('id')
         expect(res.body[0]).to.have.property('first_name')
         expect(res.body[0]).to.have.property('last_name')
+        expect(res.body[0]).to.have.property('username')
         expect(res.body[0]).to.have.property('email')
         expect(res.body[0]).to.have.property('password_hash')
+        
+        var btCompare = bcrypt.compareSync("password", res.body[0].password_hash)
+        expect(btCompare).to.be.true
         done();
       });
   });
@@ -59,8 +63,10 @@ describe('Users', function(){
         expect(res.body).to.have.property('id')
         expect(res.body).to.have.property('first_name')
         expect(res.body).to.have.property('last_name')
+        expect(res.body).to.have.property('username')
         expect(res.body).to.have.property('email')
         expect(res.body).to.have.property('password_hash')
+        
         var btCompare = bcrypt.compareSync("1234", res.body.password_hash)
         expect(btCompare).to.be.true
         done();

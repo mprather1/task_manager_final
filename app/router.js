@@ -11,7 +11,8 @@ var Router = Marionette.AppRouter.extend({
     '': 'active',
     'tasks/active': 'active',
     'tasks/completed': 'completed',
-    'tasks/new': 'newTask'
+    'tasks/new': 'newTask',
+    "login": 'loginForm'
   }
   
 });

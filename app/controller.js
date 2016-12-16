@@ -5,6 +5,7 @@ var CompletedTasks = require("./collections/CompletedTasks");
 var TasksView = require("./views/TasksView");
 var TableView = require("./views/TableView");
 var FormModalView = require("./views/FormModalView");
+var LoginModalView = require("./views/LoginModalView");
 var style = require("./public/css/style.scss");
 
 var Controller = Marionette.Object.extend({
@@ -17,7 +18,8 @@ var Controller = Marionette.Object.extend({
     var activeTasks = new ActiveTasks();
     var completedTasks = new CompletedTasks();
     var tableView = new TableView();
-    var formModalView = new FormModalView({ users: users});
+    var formModalView = new FormModalView({ users: users });
+    var loginModalView = new LoginModalView({ collection: users })
 
     activeTasks.fetch({
       success: function(request, response){
@@ -51,6 +53,7 @@ var Controller = Marionette.Object.extend({
     this.options.completedTasks = completedTasks;
     this.options.formModalView = formModalView;
     this.options.tableView = tableView;
+    this.options.loginModalView = loginModalView;
     this.app.view.showChildView('main', this.options.tableView);
     this.options.formModalView.collection = this.options.activeTasks;
     
@@ -73,6 +76,10 @@ var Controller = Marionette.Object.extend({
   
   newTask: function(){
     this.options.formModalView.render();
+  },
+  
+  loginForm: function(){
+    this.options.loginModalView.render();
   }
   
 });
