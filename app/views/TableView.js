@@ -14,12 +14,17 @@ var TableView = Backbone.Marionette.View.extend({
     }
   },
   
+  ui: {
+    header: ".table-header"
+  },
+  
   events: {
     'mouseover .table-header': 'mouseoverHeader',
     'mouseout .table-header': 'mouseoutHeader',
     'mouseover .table-row': 'mouseoverRow',
     'mouseout .table-row': 'mouseoutRow',
-    'change input[type=radio]': 'changedRadio'
+    'change input[type=radio]': 'changedRadio',
+    'click @ui.header': 'sortCollection'
   },
   
   mouseoverHeader: function(event){
@@ -39,6 +44,9 @@ var TableView = Backbone.Marionette.View.extend({
   },
   changedRadio: function(e){
     Backbone.history.navigate('tasks/' + e.currentTarget.value, { trigger: true });
+  },
+  sortCollection: function(e){
+    Backbone.trigger('tasks:sort', e);    
   }
   
 });
