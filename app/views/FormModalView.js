@@ -24,7 +24,7 @@ var FormModalView = Backbone.Marionette.View.extend({
   initialize: function(options){
     
     this.users = options.users;
-    this.model = new Task()
+    this.model = new Task();
     
     Backbone.Validation.bind(this, {
       model: this.model
@@ -67,7 +67,7 @@ var FormModalView = Backbone.Marionette.View.extend({
       });
       this.collection.add(this.model);
       this.collection.fetch();
-      this.$el.modal('hide')
+      this.$el.modal('hide');
       
       Backbone.history.navigate('tasks/active', { trigger: true });
     }

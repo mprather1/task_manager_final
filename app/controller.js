@@ -19,7 +19,7 @@ var Controller = Marionette.Object.extend({
     var completedTasks = new CompletedTasks();
     var tableView = new TableView();
     var formModalView = new FormModalView({ users: users });
-    var loginModalView = new LoginModalView({ collection: users })
+    var loginModalView = new LoginModalView({ collection: users });
 
     activeTasks.fetch({
       success: function(request, response){

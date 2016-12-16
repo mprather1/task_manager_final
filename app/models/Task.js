@@ -17,9 +17,6 @@ var Task = Backbone.Model.extend({
     project: {
       required: true
     },
-    description: {
-      required: true
-    },
     priority: {
       required: true
     },

@@ -14,7 +14,7 @@ _.extend(Backbone.Validation.callbacks, {
     var $el = view.$('[name=' + attr + ']'), 
       $group = $el.closest('.form-group');
     $group.addClass('has-error');
-    var help_block = $group.find('.help-block')
+    var help_block = $group.find('.help-block');
     help_block.html(error).removeClass('hidden');
   }
 });
