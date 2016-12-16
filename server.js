@@ -4,8 +4,6 @@ var path = require("path")
 var bodyParser = require("body-parser");
 var routes = require("./routes");
 var port = process.env.PORT || '8000';
-var bcrypt = require('bcryptjs');
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

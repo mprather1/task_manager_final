@@ -4,7 +4,7 @@ var Router = require("./router");
 
 var App = Marionette.Application.extend({
   
-  region: 'body',
+  region: '#main',
   
   onStart: function(){
     this.view = new RootView();
