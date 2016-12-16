@@ -22,20 +22,30 @@ var FormModalView = Backbone.Marionette.View.extend({
   },
   
   initialize: function(options){
+    
     this.users = options.users;
+    this.model = new Task()
+    
+    Backbone.Validation.bind(this, {
+      model: this.model
+    });
+    
   },
   
   onRender: function(){
+    
     this.$el.modal('show');
     this.showChildView('userRadio', new UsersView({
       collection: this.users
     }));
     window.history.back();
+    
   },
   
   submitForm: function(e){
+    
     e.preventDefault();
-    var task = new Task();
+    
     var taskAttrs = {
       item_number: $('#item_number_input').val(),
       location_number: $('#location_number_input').val(),
@@ -47,15 +57,20 @@ var FormModalView = Backbone.Marionette.View.extend({
       due_date: $('#due_date_input').val(),
       notes: $('#notes_input').val()
     };
-    task.set(taskAttrs);
-    task.save(null, {
-      success: function(model, response){
-        console.log(response.message);
-      }
-    });
-    this.collection.add(task);
-    this.collection.fetch();
-    Backbone.history.navigate('tasks/active', { trigger: true });
+    
+    this.model.set(taskAttrs);
+    if(this.model.isValid(true)){
+      this.model.save(null, {
+        success: function(model, response){
+          console.log(response.message);
+        }
+      });
+      this.collection.add(this.model);
+      this.collection.fetch();
+      this.$el.modal('hide')
+      
+      Backbone.history.navigate('tasks/active', { trigger: true });
+    }
   }
   
 });
