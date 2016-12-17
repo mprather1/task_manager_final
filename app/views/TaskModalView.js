@@ -36,6 +36,21 @@ var TaskModalView = Backbone.Marionette.View.extend({
     });
     this.model.collection.remove(this.model);
     this.completedTasks.add(this.model);
+  },
+  
+  serializeData: function(){
+    return {
+      "completed": this.model.get('completed'),
+      'item_number': this.model.get('id'),
+      "location_number": this.model.get('location_number'),
+      "project": this.model.get('project'),
+      "description": this.model.get('description'),
+      "priority": this.model.get('priority'),
+      "requestor": this.model.get('requestor'),
+      "assigned_to": this.model.get('assigned_to'),
+      "due_date": this.model.get('due_date'),
+      'notes': this.model.get('notes')
+    };
   }
   
 });

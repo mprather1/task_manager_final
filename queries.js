@@ -62,7 +62,7 @@ function getSingleTask(req, res, next){
 }
 
 function createTask(req, res, next){
- db.none('insert into tasks(item_number, location_number, project, description, priority, requestor, assigned_to, due_date, notes)' + 'values(${item_number}, ${location_number}, ${project}, ${description}, ${priority}, ${requestor}, ${assigned_to}, ${due_date}, ${notes})', req.body)
+ db.none('insert into tasks(location_number, project, description, priority, requestor, assigned_to, due_date, notes)' + 'values(${location_number}, ${project}, ${description}, ${priority}, ${requestor}, ${assigned_to}, ${due_date}, ${notes})', req.body)
  .then(function(){
     res.status(200)
       .json({

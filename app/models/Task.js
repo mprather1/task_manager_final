@@ -5,13 +5,9 @@ var Task = Backbone.Model.extend({
   urlRoot: "http://shintech.ninja:8000/api/tasks/active",
   
   validation: {
-    item_number: [{
-      required: true,
-      msg: 'You must enter an item number!'
-    }],
     location_number: [{
       required: true,
-      msg: 'You must enter a location number!'
+      msg: 'You must enter a location!'
     }],
     description: [{
       required: true,

@@ -7,7 +7,7 @@ var TasksView = Backbone.Marionette.CollectionView.extend({
   
   initialize: function(options){
     this.completedTasks = options.completedTasks;
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'reset', this.render);
     this.listenTo(Backbone, 'tasks:sort', this.sortCollection);
   },
   

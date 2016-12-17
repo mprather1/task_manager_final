@@ -47,7 +47,6 @@ var FormModalView = Backbone.Marionette.View.extend({
     e.preventDefault();
     
     var taskAttrs = {
-      item_number: $('#item_number_input').val(),
       location_number: $('#location_number_input').val(),
       project: $('[name="project-radio"]:radio:checked').val(),
       description: $('#description_input').val(),
