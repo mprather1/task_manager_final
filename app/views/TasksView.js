@@ -6,6 +6,7 @@ var TasksView = Backbone.Marionette.CollectionView.extend({
   tagName: 'tbody',
   
   initialize: function(options){
+    this.sort = false;
     this.completedTasks = options.completedTasks;
     this.listenTo(this.collection, 'reset', this.render);
     this.listenTo(Backbone, 'tasks:sort', this.sortCollection);
@@ -32,13 +33,13 @@ var TasksView = Backbone.Marionette.CollectionView.extend({
   
   sortCollection: function(options){
     var name = options.target.id;
-    if (this.sortFlag === false){
-      this.sortFlag = true;
+    if (this.sort === false){
+      this.sort = true;
       this.collection.setSorting(name, -1);
       this.collection.fullCollection.sort();
       this.collection.getFirstPage();
     } else {
-      this.sortFlag = false;
+      this.sort = false;
       this.collection.setSorting(name, 1);
       this.collection.fullCollection.sort();
       this.collection.getFirstPage();
