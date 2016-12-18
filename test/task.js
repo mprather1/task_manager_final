@@ -2,7 +2,7 @@ var chai = require("chai");
 var chaiHttp = require("chai-http");
 var server = require('../server');
 var expect = chai.expect;
-var db = require("../queries").db
+var db = require("../queries").db;
 
 
 chai.use(chaiHttp);
@@ -10,17 +10,17 @@ chai.use(chaiHttp);
 describe("Clear tasks...", function(done) {
   
   beforeEach(function(done){
-    db.none('TRUNCATE tasks RESTART IDENTITY')
+    db.none('TRUNCATE tasks RESTART IDENTITY');
     done();
   });
   
   it('should not see data', function(done) {
     db.any('select * from tasks')
     .then(function(data){
-      expect(data).to.deep.equal([])
-      }).then(done, done)
-  })
-})
+      expect(data).to.deep.equal([]);
+      }).then(done, done);
+  });
+});
 
 describe('Tasks', function(){
   
@@ -43,21 +43,21 @@ describe('Tasks', function(){
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res).to.be.json;
-        expect(res.body[0]).to.have.property('id')
-        expect(res.body[0]).to.have.property('location_number')
-        expect(res.body[0]).to.have.property('project')
-        expect(res.body[0]).to.have.property('description')
-        expect(res.body[0]).to.have.property('priority')
-        expect(res.body[0]).to.have.property('requestor')
-        expect(res.body[0]).to.have.property('assigned_to')
-        expect(res.body[0]).to.have.property('due_date')
-        expect(res.body[0]).to.have.property('notes')
+        expect(res.body[0]).to.have.property('id');
+        expect(res.body[0]).to.have.property('location_number');
+        expect(res.body[0]).to.have.property('project');
+        expect(res.body[0]).to.have.property('description');
+        expect(res.body[0]).to.have.property('priority');
+        expect(res.body[0]).to.have.property('requestor');
+        expect(res.body[0]).to.have.property('assigned_to');
+        expect(res.body[0]).to.have.property('due_date');
+        expect(res.body[0]).to.have.property('notes');
         expect(res.body[0].completed).to.be.false;        
         done();
       });
   });
   
-  it('should update a SINGLE task on /tasks PUT', function(done) {
+  it('should update a SINGLE active task to completed on /tasks/active PUT', function(done) {
     chai.request(server)
     .put('/api/tasks/active/1')
     .send({"completed":true})
@@ -69,7 +69,7 @@ describe('Tasks', function(){
     });
   });
   
-  it('should list a SINGLE active task on /task/:id GET', function(done) {
+  it('should list a SINGLE active task on /task/active/:id GET', function(done) {
     chai.request(server)
       .get('/api/tasks/active/1')
       .end(function(err, res){
@@ -77,15 +77,15 @@ describe('Tasks', function(){
         expect(res).to.have.status(200);
         expect(res).to.be.json;
         expect(res).to.be.a('object');
-        expect(res.body).to.have.property('id')
-        expect(res.body).to.have.property('location_number')
-        expect(res.body).to.have.property('project')
-        expect(res.body).to.have.property('description')
-        expect(res.body).to.have.property('priority')
-        expect(res.body).to.have.property('requestor')
-        expect(res.body).to.have.property('assigned_to')
-        expect(res.body).to.have.property('due_date')
-        expect(res.body).to.have.property('notes')
+        expect(res.body).to.have.property('id');
+        expect(res.body).to.have.property('location_number');
+        expect(res.body).to.have.property('project');
+        expect(res.body).to.have.property('description');
+        expect(res.body).to.have.property('priority');
+        expect(res.body).to.have.property('requestor');
+        expect(res.body).to.have.property('assigned_to');
+        expect(res.body).to.have.property('due_date');
+        expect(res.body).to.have.property('notes');
         expect(res.body.completed).to.be.true;
         done();
       });    
@@ -98,35 +98,34 @@ describe('Tasks', function(){
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res).to.be.json;
-        expect(res.body[0]).to.have.property('id')
-        expect(res.body[0]).to.have.property('location_number')
-        expect(res.body[0]).to.have.property('project')
-        expect(res.body[0]).to.have.property('description')
-        expect(res.body[0]).to.have.property('priority')
-        expect(res.body[0]).to.have.property('requestor')
-        expect(res.body[0]).to.have.property('assigned_to')
-        expect(res.body[0]).to.have.property('due_date')
-        expect(res.body[0]).to.have.property('notes')
+        expect(res.body[0]).to.have.property('id');
+        expect(res.body[0]).to.have.property('location_number');
+        expect(res.body[0]).to.have.property('project');
+        expect(res.body[0]).to.have.property('description');
+        expect(res.body[0]).to.have.property('priority');
+        expect(res.body[0]).to.have.property('requestor');
+        expect(res.body[0]).to.have.property('assigned_to');
+        expect(res.body[0]).to.have.property('due_date');
+        expect(res.body[0]).to.have.property('notes');
         expect(res.body[0].completed).to.be.true;
         done();
       });
   });
   
    
-  it.skip('should delete a SINGLE task on /tasks/:id DELETE', function(done) {
+  it('should delete a SINGLE task on /tasks/:id DELETE', function(done) {
     chai.request(server)
-      .get("/api/tasks/active")
+      .get("/api/tasks/completed")
       .end(function(err, res) {
         chai.request(server)
-          .get("api/tasks/active/1" )
+          .delete("/api/tasks/" + res.body[0].id )
           .end(function(error, response){
-            response.should.have.status(200);
-            response.should.be.json;
-            response.body.should.be.a('object');
-            response.body.should.have.property('removed');
-            response.body.removed.should.be.a('object');  
+            expect(response).to.have.status(200);
+            expect(response).to.be.json;
+            expect(response.body).to.be.a('object');
+            expect(response.body).to.have.status('success');
             done();
-          })
-      })
+          });
+      });
   });
 });
