@@ -39,6 +39,12 @@ var time = {
   },
   year: function(d){
     return d.getFullYear()
+  },
+  currentTime: function(d){
+    return this.hour(d) + ":" + this.minute(d) + ":" + this.second(d) + " " + this.ampm(d)
+  },
+  currentDate: function(d){
+    return this.day(d) + ", " + this.month(d) + " " + this.date(d) + ", " + this.year(d);
   }
 }
 
