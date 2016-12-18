@@ -2,8 +2,25 @@ var chai = require("chai");
 var chaiHttp = require("chai-http");
 var server = require('../server');
 var expect = chai.expect;
+var db = require("../queries").db
+
 
 chai.use(chaiHttp);
+
+describe("Clear tasks...", function(done) {
+  
+  beforeEach(function(done){
+    db.none('TRUNCATE tasks RESTART IDENTITY')
+    done();
+  });
+  
+  it('should not see data', function(done) {
+    db.any('select * from tasks')
+    .then(function(data){
+      expect(data).to.deep.equal([])
+      }).then(done, done)
+  })
+})
 
 describe('Tasks', function(){
   

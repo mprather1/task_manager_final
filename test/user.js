@@ -3,8 +3,24 @@ var chaiHttp = require("chai-http");
 var server = require('../server');
 var expect = chai.expect;
 var bcrypt = require('bcryptjs');
+var db = require("../queries").db
 
 chai.use(chaiHttp);
+
+describe("Clear users...", function(done) {
+  
+  beforeEach(function(done){
+    db.none('TRUNCATE users RESTART IDENTITY')
+    done();
+  });
+  
+  it('should not see data', function(done) {
+    db.any('select * from users')
+    .then(function(data){
+      expect(data).to.deep.equal([])
+      }).then(done, done)
+  })
+})
 
 describe('Users', function(){
 

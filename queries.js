@@ -176,7 +176,8 @@ function removeUser(req, res, next){
 }
 
 module.exports = {
-
+  
+  db: db,
 //Tasks
   getAllTasks: getAllTasks,
   getCompletedTasks: getCompletedTasks,
